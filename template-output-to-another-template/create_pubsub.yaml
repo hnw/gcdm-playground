@@ -1,0 +1,16 @@
+imports:
+- path: create_pubsub_topic.jinja
+- path: create_pubsub_subscription.jinja
+
+resources:
+- name: my-topic
+  type: create_pubsub_topic.jinja
+- name: my-subscription
+  type: create_pubsub_subscription.jinja
+  properties:
+    topic: $(ref.my-topic.name)
+outputs:
+- name: topic-name
+  value: $(ref.my-topic.name)
+- name: subscription-name
+  value: $(ref.my-subscription.name)

@@ -1,0 +1,10 @@
+{% set TOPIC = env['deployment'] + '-' + env['name'] %}
+
+resources:
+- name: create-topic
+  type: gcp-types/pubsub-v1:projects.topics
+  properties:
+    topic: {{ TOPIC }}
+outputs:
+- name: name
+  value: $(ref.create-topic.name)

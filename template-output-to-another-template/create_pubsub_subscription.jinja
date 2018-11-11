@@ -1,0 +1,11 @@
+{% set SUBSCRIPTION = env['deployment'] ~ '-' ~ env['name'] %}
+
+resources:
+- name: create-subscription
+  type: gcp-types/pubsub-v1:projects.subscriptions
+  properties:
+    subscription: {{ SUBSCRIPTION }}
+    topic: {{ properties['topic'] }}
+outputs:
+- name: name
+  value: $(ref.create-subscription.name)
