@@ -59,7 +59,7 @@ def GenerateConfig(ctx):
     }
     cloud_function = {
         'type': 'gcp-types/cloudfunctions-v1:projects.locations.functions',
-        'name': function_name,
+        'name': 'create-function',
         'properties': {
             'parent':
                 '/'.join([
@@ -98,10 +98,7 @@ def GenerateConfig(ctx):
         'resources':
             resources,
         'outputs': [{
-            'name': 'sourceArchiveUrl',
-            'value': source_archive_url
-        }, {
             'name': 'name',
-            'value': '$(ref.' + function_name + '.name)'
+            'value': '$(ref.create-function.name)'
         }]
     }

@@ -1,0 +1,15 @@
+{% set BUCKETNAME = "bucket-" + env["deployment"]  %}
+
+resources:
+- name: create-bucket
+  type: gcp-types/storage-v1:buckets
+  properties:
+    name: {{ BUCKETNAME }}
+    predefinedAcl: projectPrivate
+    projection: full
+    location: US-WEST1
+    storageClass: STANDARD
+
+outputs:
+- name: name
+  value: $(ref.create-bucket.name)
