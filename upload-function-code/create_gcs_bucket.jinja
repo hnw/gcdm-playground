@@ -1,0 +1,13 @@
+{% set BUCKETNAME = "bucket-" + env["deployment"]  %}ga
+
+resources:
+- type: gcp-types/storage-v1:buckets
+  name: {{ BUCKETNAME }}
+  properties:
+    predefinedAcl: projectPrivate
+    projection: full
+    location: US
+    storageClass: STANDARD
+outputs:
+- name: name
+  value: ($ref.{{ BUCKETNAME }}.name)
